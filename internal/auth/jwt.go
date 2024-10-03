@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"github.com/golang-jwt/jwt"
 	"strconv"
 	"time"
@@ -29,4 +30,20 @@ func SignJWT(userId int64, conf SignConfig) (string, error) {
 		return "", err
 	}
 	return ss, nil
+}
+
+func ValidateJWT(tokenString string, conf SignConfig) (*Claim, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claim{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(conf.Key), nil
+	})
+	if err != nil {
+		return nil, err
+	} else if claim, ok := token.Claims.(*Claim); ok && token.Valid {
+		return claim, nil
+	}
+	return nil, fmt.Errorf("invalid token")
+
 }
