@@ -1,0 +1,9 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:15.3
+    volumes:
+      - ./postgres:/var/data
+    ports:
+      - "5432:5432"
+    
