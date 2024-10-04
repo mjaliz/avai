@@ -2,16 +2,16 @@ package app
 
 import "gorm.io/gorm"
 
-var App application
+var App Application
 
-type application struct {
+type Application struct {
 	db *gorm.DB
 }
 
 func NewApp(db *gorm.DB) {
-	App = application{db: db}
+	App = Application{db: db}
 }
 
-func (a application) DB() *gorm.DB {
+func (a Application) DB() *gorm.DB {
 	return a.db
 }
