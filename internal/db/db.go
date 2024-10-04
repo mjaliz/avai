@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func initDB() *gorm.DB {
+func InitDB() *gorm.DB {
 
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 		os.Getenv("POSTGRES_HOST"),

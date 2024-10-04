@@ -1,9 +1,21 @@
-version: "3"
+version: '3.7'
 services:
   postgres:
     image: postgres:15.3
-    volumes:
-      - ./postgres:/var/data
     ports:
       - "5432:5432"
-    
+    environment:
+      - POSTGRES_USER=najva_staging_user
+      - POSTGRES_PASSWORD=cvV895xP8AnTbfbekCvgwSWvyAzzfSff
+      - POSTGRES_DB=najva_staging
+      - POSTGRES_PORT=5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data/
+    restart: always
+  adminer:
+    image: adminer:4.8.1-standalone
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgres
