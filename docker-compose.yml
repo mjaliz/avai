@@ -5,9 +5,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=najva_staging_user
+      - POSTGRES_USER=avai_staging_user
       - POSTGRES_PASSWORD=cvV895xP8AnTbfbekCvgwSWvyAzzfSff
-      - POSTGRES_DB=najva_staging
+      - POSTGRES_DB=avai_staging
       - POSTGRES_PORT=5432
     volumes:
       - ./postgres:/var/lib/postgresql/data/

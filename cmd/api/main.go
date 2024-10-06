@@ -1,17 +1,20 @@
 package main
 
 import (
+	"avai/internal/app"
+	"avai/internal/db"
+	"avai/internal/handlers"
+	"avai/internal/input"
+	"avai/internal/routes"
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"najva/internal/app"
-	"najva/internal/db"
-	"najva/internal/handlers"
-	"najva/internal/routes"
 )
 
 func main() {
 	app.NewApp(db.InitDB())
 	e := echo.New()
+	e.Validator = &input.CustomValidator{Validator: validator.New()}
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	auth := e.Group("/auth")

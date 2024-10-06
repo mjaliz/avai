@@ -1,8 +1,8 @@
 package routes
 
 import (
+	"avai/internal/handlers"
 	"github.com/labstack/echo/v4"
-	"najva/internal/handlers"
 )
 
 func Auth(g *echo.Group) {
